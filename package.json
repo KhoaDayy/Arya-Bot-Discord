@@ -1,0 +1,31 @@
+{
+  "name": "arya-bot-ver-2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@discordjs/opus": "^0.9.0",
+    "@distube/ytdl-core": "^4.14.4",
+    "@napi-rs/canvas": "^0.1.53",
+    "axios": "^1.7.2",
+    "canvacord": "^6.0.2",
+    "discord-player": "^6.7.1",
+    "discord-player-youtubei": "^1.2.4",
+    "discord.js": "^14.15.3",
+    "djs-commander": "^0.0.50",
+    "dotenv": "^16.4.5",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.2",
+    "nodemon": "^3.1.4",
+    "replicate": "^0.32.0",
+    "sharp": "^0.33.4",
+    "socket.io": "^4.7.5"
+  }
+}

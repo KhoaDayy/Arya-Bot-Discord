@@ -1,0 +1,16 @@
+const { StringSelectMenuInteraction } = require("discord.js");
+
+module.exports.data = {
+    name: "player_SelectionFunc",
+    type: "SelectMenu",
+}
+
+/**
+ * @param { StringSelectMenuInteraction } interaction
+ */
+module.exports.execute = async (interaction) => {
+   const query = interaction.values?.at(0)
+//    const command = interaction.client.functions.get("search");
+//    await command.execute(interaction, query)
+   return
+}
