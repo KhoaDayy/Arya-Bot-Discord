@@ -1,5 +1,5 @@
 const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, StringSelectMenuOptionBuilder, StringSelectMenuBuilder } = require('discord.js');
-const { useMainPlayer } = require('discord-player');
+const { QueryType,  GuildQueue, useMainPlayer } = require('discord-player');
 const player = useMainPlayer();
 const AryaIcons = require('./../../utility/icon');
 const CreateButton = ({ id = null, label = null, style = ButtonStyle.Secondary, emoji = null, disable = true }) => {
@@ -38,8 +38,29 @@ const create_Related = async (track, history) => {
         return [];
     }
 };
+const getQueryTypeIcon = (type) => {
+    switch (type) {
+        case QueryType.YOUTUBE:
+        case QueryType.YOUTUBE_PLAYLIST:
+        case QueryType.YOUTUBE_SEARCH:
+        case QueryType.YOUTUBE_VIDEO:
+            return AryaIcons.yticon;
+        case QueryType.SPOTIFY_ALBUM:
+        case QueryType.SPOTIFY_PLAYLIST:
+        case QueryType.SPOTIFY_SONG:
+        case QueryType.SPOTIFY_SEARCH:
+            return AryaIcons.sportifyicon;
+        case QueryType.SOUNDCLOUD:
+        case QueryType.SOUNDCLOUD_TRACK:
+        case QueryType.SOUNDCLOUD_PLAYLIST:
+        case QueryType.SOUNDCLOUD_SEARCH:
+            return AryaIcons.soundcloudicon;
+        default:
+            return AryaIcons.AttachmentIconURL;
+    }
+}
 
-const repeatMode = ["OFF", "TRACK", "QUEUE", "AUTOPLAY"];
+const repeatMode = ["OFF", `${AryaIcons.loop} Track`, `${AryaIcons.queue} Queue`, `${AryaIcons.loop} AutoPlay`]
 
 module.exports = {
     data: {
@@ -51,29 +72,29 @@ module.exports = {
         const track = tracks ?? queue.currentTrack;
         const requestedBy = track?.requestedBy ?? queue.metadata.requestedBy;
         let code = {};
-        const process = queue.node.createProgressBar({
-            leftChar: '﹏',
-            rightChar: '﹏',
-            indicator: '𓊝',
-        });
+        const queryTypeIcon = getQueryTypeIcon(track?.queryType);
+        const timestamps = queue?.node.getTimestamp();
+        const trackDurationSymbol = timestamps?.progress === "Infinity" ? "" : "%";
+        const trackDuration = timestamps?.progress === "Infinity" ? "∞" : timestamps?.progress;
         const embed = new EmbedBuilder()
-            .setDescription(`Đang phát: **[${track.title}](${track.url})**\nVolume: **${queue.node.volume}%**`)
-            .setColor('Random')
+            .setAuthor({
+                name: `${track?.title}`, iconURL: `${queryTypeIcon}`, url: track?.url
+            })
+            .setDescription(
+                `Volume: **${queue.node.volume}** % - Playing:  **${trackDuration}**${trackDurationSymbol}${AryaIcons.anigif}`
+            )
             .setFooter({
                 text: `Đã thêm bởi ${requestedBy.username}`,
                 iconURL: requestedBy.displayAvatarURL()
             })
             .setTimestamp()
-            .setImage(track.thumbnail)
-            .addFields({
-                name: " ",
-                value: `${process}`
-            });
+            .setImage(track?.thumbnail)
         if (queue.repeatMode !== 0)
             embed.addFields({ name: `Lặp lại: ${repeatMode[queue.repeatMode]}`, value: " ", inline: false });
-        code.embeds = [embed];
+
 
         if (queue.node.isPlaying() || !queue.isEmpty()) {
+            embed.addFields({ name: " ", value: `${queue.node.createProgressBar({ leftChar: "﹏", rightChar: "﹏", indicator: "𓊝" })}` });
             const getRelatedTracks = await create_Related(track, queue?.history);
             const _getRelatedTracks = getRelatedTracks.filter(t => t.url.length < 100).slice(0, 10);
             const creator_Track = _getRelatedTracks.map((track, i) => {
@@ -140,13 +161,12 @@ module.exports = {
                 Emoji: AryaIcons.shuffle
             }];
 
-            const __func = _func.filter(function (f) {
-                if (queue.isEmpty()) {
-                    if (f.Label === "Shuffle" || f.Label === "Loop" || f.Label === "Queue")
-                        return false;
-                }
+            const _funcfilter = _func.filter(function (f) {
+                if (queue.isEmpty() && (f.Label === "Shuffle" || f.Label === "Queue")) return false;    
                 if (queue.node.volume > 99 && f.Value === 'volumeinc') return false;
                 if (queue.node.volume < 1 && f.Value === 'volumedec') return false;
+                if (queue.repeatMode == 0 && f.Value === 'Mute') return false;
+
                 return true;
             });
 
@@ -196,7 +216,8 @@ module.exports = {
 
         
             code.components = [getRelatedTracksrow, getRelatedFuncrow, button];
-        }
+            code.embeds = [embed];
+        }   
 
         return code;
     }

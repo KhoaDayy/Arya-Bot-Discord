@@ -1,7 +1,7 @@
 const { ModalSubmitInteraction, ModalBuilder } = require("discord.js");
 
 module.exports.data = {
-    name: "modal_search",
+    name: "search-modal",
     type: "modal",
 }
 
@@ -11,9 +11,7 @@ module.exports.data = {
 module.exports.execute = async (interaction) => {
     const { guild, client, fields } = interaction;
     const query = fields.getTextInputValue("search-input");
-    const command = client.functions.get("Search");
+    const command = client.functions.get("search");
     await command.execute(interaction, query);
 
 }
-// const command = client.functions.get("Search");
-// await command.execute(interaction, query);

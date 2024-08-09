@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, AttachmentBuilder } = require('discord.js');
 const level = require('../../mongoDB/level');
 const { Font, RankCardBuilder  } = require("canvacord");
-const caculateXP = require('../../untils/caculateXP');
+const caculateXP = require('../../utility/caculateXP');
 
 module.exports = {
     data: new SlashCommandBuilder()

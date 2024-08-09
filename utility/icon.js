@@ -13,6 +13,11 @@ module.exports = {
     lyrics: "<:lyrics:1271120626840633374> ",
     loop: "<:Loop:1271129528126668800>",
     mute: "<:mute:1271130958271348736>",
-    shuffle: "<:shuffle:1271133622161637417>"
+    shuffle: "<:shuffle:1271133622161637417>",
+    yticon: "https://cdn.discordapp.com/attachments/1064851388221358153/1243685364502102066/youtube.gif",
+    sportifyicon: "https://cdn.discordapp.com/attachments/1064851388221358153/1243684923626356846/spotify.gif",
+    soundcloudicon: "https://cdn.discordapp.com/attachments/1064851388221358153/1243684572672037027/SOUNDCLOUD.gif",
+    AttachmentIconURL: "https://cdn.discordapp.com/attachments/1064851388221358153/1091717240669348010/ezgif.com-crop_1.gif",
+    anigif: "<a:gifani:1271384959122276423>"
 }
 
