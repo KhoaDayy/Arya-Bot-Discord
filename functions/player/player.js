@@ -60,7 +60,7 @@ const getQueryTypeIcon = (type) => {
     }
 }
 
-const repeatMode = ["OFF", `${AryaIcons.loop} Track`, `${AryaIcons.queue} Queue`, `${AryaIcons.loop} AutoPlay`]
+const repeatMode = ["OFF", `${AryaIcons.loop} Track`, `${AryaIcons.queue} Queue`, `${AryaIcons.shuffle} AutoPlay`]
 
 module.exports = {
     data: {
@@ -132,7 +132,7 @@ module.exports = {
             }, {
                 Label: 'Queue',
                 Description: 'Hàng Đợi',
-                Value: 'Queue',
+                Value: 'queue',
                 Emoji: AryaIcons.queue
             }, {
                 Label: 'Mute',
@@ -170,7 +170,7 @@ module.exports = {
                 return true;
             });
 
-            const creator_Func = _func.map((f) => {
+            const creator_Func = _funcfilter.map((f) => {
                 return new StringSelectMenuOptionBuilder()
                     .setLabel(f.Label)
                     .setDescription(f.Description)
@@ -214,7 +214,12 @@ module.exports = {
                 }),
             );
 
-        
+            if (!!queue?.filters?.ffmpeg?.toArray().length) {
+                embed.addFields(
+                    { name: ` `, value: `**Filter: ${queue?.filters?.ffmpeg?.getFiltersEnabled()}**`.slice(0, 1020), inline: false }
+                );
+            }
+
             code.components = [getRelatedTracksrow, getRelatedFuncrow, button];
             code.embeds = [embed];
         }   

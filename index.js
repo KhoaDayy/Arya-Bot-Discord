@@ -4,13 +4,37 @@ const { Player } = require('discord-player');
 const { CommandHandler } = require('djs-commander');
 const path = require('path');
 const fs = require('fs');
-const welcome = require('./untils/welcome');
-const goodbye = require('./untils/goodbye');
+const welcome = require('./utility/welcome');
+const goodbye = require('./utility/goodbye');
 const welcomeSchema = require('./mongoDB/welcome');
 const goodbyeSchema = require('./mongoDB/goodbye');
+const express = require('express')
+const chalk = require('chalk');
+const chalkercli = require("chalkercli");
+const CFonts = require('cfonts');
+const { YoutubeiExtractor } = require('discord-player-youtubei');
+const { env } = require('process');
 
+const app = express()
+const port = process.env.PORT || 8080;
+const host = '0.0.0.0';
 console.clear();
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './utility/index.html'));
+});
+
+app.listen(port, host);
+CFonts.say('Arya Bot', {
+  font: 'block',
+    align: 'center',
+gradient: ['red', 'magenta']
+  })
+CFonts.say(`Bot Created By Kynx`, {
+		font: 'console',
+		align: 'center',
+		gradient: ['red', 'magenta']
+		})
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -21,7 +45,7 @@ const client = new Client({
     GatewayIntentBits.GuildPresences,
   ],
 });
-
+console.log('Server started at http://localhost:' + port);
 const player = new Player(client, {
   ytdlOptions: {
     quality: 'highestaudio',
@@ -30,20 +54,35 @@ const player = new Player(client, {
 });
 
 player.extractors.loadDefault();
+
+try {
+  player.extractors.register(YoutubeiExtractor, {
+    authentication: 'access_token=ya29.a0AcM612we54P2okKnD6ur1c3-jz8ALD-nhDaJjg9b5TDRyR9E5HWv_wh0eO7srGeUJ4MOk7Ymx0I2OrRPN4TOYY9zvqigysfFambFMbTH7Paz93UyuFmj9q3-vDWUOop22jMZk8SXH-PmgCZt8yD5rrXqt4BhXsRcRjiDyzGzrEhE-LPlaCgYKARQSARASFQHGX2MisxMRubYTiMullwjohAHZmw0183; refresh_token=1//0eFzKEtERhrwDCgYIARAAGA4SNwF-L9Ir_q7UI5b5tWvAuYT8i1lx_OjYg3PzEWx8fT6GJ1_J7c4iGsECSmedrAVYFUx8wa0hbHo; scope=https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube-paid-content; token_type=Bearer; expiry_date=2024-08-10T11:14:41.079Z' 
+  });
+  
+  
+} catch (error) {
+  console.log(
+    chalk.white.bgRed.bold('[LỖI] :') +
+    (error)
+  )
+}
+
+// player.extractors.loadDefault();
 player.setMaxListeners(100);
 
 client.player = player;
 client.functions = new Collection();
-client.context = new Collection();
 client.commands = new Collection();
-client.cooldowns = new Collection();
+
 
 new CommandHandler({
   client,
   commandsPath: path.join(__dirname, 'commands'),
   eventsPath: path.join(__dirname, 'events'),
-  validationsPath: path.join(__dirname, 'validations'),
+  //validationsPath: path.join(__dirname, 'validations'),
 });
+
 
 // Load functions
 const loadFunctions = (dir) => {
@@ -59,7 +98,7 @@ const loadFunctions = (dir) => {
       if ('data' in command && 'execute' in command) {
         client.functions.set(command.data.name, command);
       } else {
-        console.warn(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+        console.warn(`[Cảnh Báo] The command at ${filePath} is missing a required "data" or "execute" property.`);
       }
     }
   }
@@ -84,6 +123,8 @@ const loadEvents = (dir) => {
 
 loadEvents('player');
 
+
+
 client.on('guildMemberAdd', async (member) => {
   try {
     const guildID = member.guild.id;
@@ -99,7 +140,10 @@ client.on('guildMemberAdd', async (member) => {
       });
     }
   } catch (error) {
-    console.error('Lỗi khi xử lý sự kiện guildMemberAdd:', error);
+    console.log(
+      chalk.blue.bgRed.bold('[LỖI] :') +
+      (error)
+    )
   }
 });
 
@@ -118,23 +162,30 @@ client.on('guildMemberRemove', async (member) => {
       });
     }
   } catch (error) {
-    console.error('Lỗi khi xử lý sự kiện guildMemberRemove:', error);
+    console.log(
+      chalk.blue.bgRed.bold('[LỖI] :') +
+      (error)
+    )
   }
 });
 
 client.on('interactionCreate', async (interaction) => {
   try {
+    
     if (interaction.isAutocomplete() || interaction.isMessageComponent() || interaction.isModalSubmit()) {
       const command = interaction.client.functions.get(interaction.customId || interaction.commandName);
       if (!command) {
-        console.error(`Lệnh với ${interaction.customId || interaction.commandName} không được tìm thấy.`);
+        //console.error(`Lệnh với ${interaction.customId || interaction.commandName} không được tìm thấy.`);
         return;
       }
 
       await command.execute(interaction);
     }
   } catch (error) {
-    console.error('Lỗi khi thực thi lệnh:', error);
+    console.log(
+      chalk.blue.bgRed.bold('[LỖI] :') +
+      (error)
+    )
     const response = { content: 'Có lỗi xảy ra.', ephemeral: true };
     if (interaction.deferred || interaction.replied) {
       await interaction.followUp(response).catch(err => console.error('Lỗi khi gửi followUp:', err));

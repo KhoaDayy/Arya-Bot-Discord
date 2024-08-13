@@ -18,22 +18,29 @@ module.exports.execute = async (interaction) => {
    const {guild, client, values} =interaction 
    const query = interaction.values?.at(0)
    const queue = useQueue(guild.id)
-
-   if (query == "search") {
-      const modal = new ModalBuilder()
-      .setTitle('Search')
-      .setCustomId('search-modal')
-      .addComponents(
-        new ActionRowBuilder().addComponents(
-          new TextInputBuilder()
-            .setCustomId('search-input')
-            .setLabel('Search for a song')
-            .setStyle(TextInputStyle.Short)
-        )
-      );
-    
-    await interaction.showModal(modal);
-    return;
+   
+   switch (query) {
+      case 'queue': {
+         const QueueTrack = client.functions.get("queue");
+         QueueTrack.execute(interaction, queue);
+         return;
+      }
+      case 'search': {
+         const modal = new ModalBuilder()
+         .setTitle('Search')
+         .setCustomId('search-modal')
+         .addComponents(
+           new ActionRowBuilder().addComponents(
+             new TextInputBuilder()
+               .setCustomId('search-input')
+               .setLabel('Search for a song')
+               .setStyle(TextInputStyle.Short)
+           )
+         );
+       
+       await interaction.showModal(modal);
+       return;
+      }
    }
    interaction.deferUpdate().catch(e => console.error);
    if(!queue) return;
@@ -45,9 +52,6 @@ module.exports.execute = async (interaction) => {
          queue.setRepeatMode(repeatMode)
 
          await Update_Player (client, queue)
-         return;
-      }
-      case 'queue': {
          return;
       }
       case 'autoplay':{

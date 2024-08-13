@@ -12,6 +12,9 @@ module.exports = {
         })
         .setTimestamp()
         .setThumbnail(track.thumbnail)
-    return queue.metadata.channel.send({embeds: [embed] })
+    const replied = await queue.metadata?.channel?.send({embeds: [embed], fetchReply: true})
+    setTimeout(function () {
+            replied.delete().catch(err => {  });
+    }, 5000)
     }
 }

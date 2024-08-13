@@ -1,6 +1,6 @@
 const {Message } = require('discord.js');
 const Level = require('../../mongoDB/level');
-const caculateXP = require('../../untils/caculateXP');
+const caculateXP = require('../../utility/caculateXP');
 const cooldowns = new Set();
 
 function getRandomXP(min, max) {
