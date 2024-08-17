@@ -24,12 +24,12 @@ Arya Bot là bot Discord Được code bởi [KhoaDayy](https://github.com/KhoaD
 git clone https://github.com/KhoaDayy/Arya-Bot-Discord.git
 cd Zibot
 ```
-2. cài đặt thư viện cần thiết:
+2. Cài đặt thư viện cần thiết:
 
 ```bash
 npm install
 ```
-3. thiết lập giá trị môi trường (e.g., TOKEN, MONGO), config:
+3. Thiết lập giá trị môi trường (e.g., TOKEN, MONGO), config:
 
 .env:
 ```bash
