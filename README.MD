@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://discord.com/oauth2/authorize?client_id=998801164902613022"><img src="https://img.shields.io/badge/ADD_Bot-Ziji_Bot?style=for-the-badge&label=Ziji%20Bot&color=%237289DA" alt="Add Ziji bot"></a>
+    <a href="https://discord.com/oauth2/authorize?client_id=998801164902613022"><img src="https://img.shields.io/badge/ADD_Bot-Arya_Bot?style=for-the-badge&label=Arya%20Bot&color=%237289DA" alt="Add Ziji bot"></a>
 </p>
 
 # (./) Arya Bot
@@ -11,8 +11,8 @@ Arya Bot là bot Discord Được code bởi [KhoaDayy](https://github.com/KhoaD
 <p>
   <div class="image">
     <a href="./" data-sub-html="Description">
-      <img alt="Player" src="https://raw.githubusercontent.com/zijipia/zijipia/Ziji-Discord-Bot-Image/Assets/Player.png" />
-      <img alt="Search" src="https://github.com/zijipia/zijipia/blob/Ziji-Discord-Bot-Image/Assets/search.png" />
+      <img alt="Player" src="https://raw.githubusercontent.com/KhoaDayy/Arya-Bot-Discord/master/Assets/Player.png?token=GHSAT0AAAAAACWBXPBKI75WBVDWCDMJCHTYZWAA4RA" />
+      <img alt="Search" src="https://raw.githubusercontent.com/KhoaDayy/Arya-Bot-Discord/master/Assets/Search.png?token=GHSAT0AAAAAACWBXPBKI75WBVDWCDMJCHTYZWAA4RA" />
     </a>
   </div>
 </p>
