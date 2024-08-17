@@ -12,7 +12,7 @@ Arya Bot là bot Discord Được code bởi [KhoaDayy](https://github.com/KhoaD
   <div class="image">
     <a href="./" data-sub-html="Description">
       <img alt="Player" src="https://raw.githubusercontent.com/KhoaDayy/Arya-Bot-Discord/master/Assets/Player.png?token=GHSAT0AAAAAACWBXPBKI75WBVDWCDMJCHTYZWAA4RA" />
-      <img alt="Search" src="https://raw.githubusercontent.com/KhoaDayy/Arya-Bot-Discord/master/Assets/Search.png?token=GHSAT0AAAAAACWBXPBKI75WBVDWCDMJCHTYZWAA4RA" />
+      <img alt="Search" src="https://raw.githubusercontent.com/KhoaDayy/Arya-Bot-Discord/master/Assets/Search.png?token=GHSAT0AAAAAACWBXPBLXVHRQMCBWOB7X7CQZWAA5YQ" />
     </a>
   </div>
 </p>
