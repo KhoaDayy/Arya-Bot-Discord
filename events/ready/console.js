@@ -9,5 +9,4 @@
 
 module.exports = (client, member) => {
       console.log(`${client.user.tag} đã sẵn sàng!`)
-      
   }
