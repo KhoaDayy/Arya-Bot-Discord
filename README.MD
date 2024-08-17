@@ -2,7 +2,8 @@
     <a href="https://discord.com/oauth2/authorize?client_id=998801164902613022"><img src="https://img.shields.io/badge/ADD_Bot-Arya_Bot?style=for-the-badge&label=Arya%20Bot&color=%237289DA" alt="Add Ziji bot"></a>
 </p>
 
-# (./) Arya Bot
+# Arya-Bot-Discord
+
 Arya Bot là bot Discord Được code bởi [KhoaDayy](https://github.com/KhoaDayy) sử dụng [discord.js](https://discord.js.org/) và [discord-player](https://discord-player.js.org/) 
 
 ## Features
@@ -22,7 +23,7 @@ Arya Bot là bot Discord Được code bởi [KhoaDayy](https://github.com/KhoaD
 
 ```bash
 git clone https://github.com/KhoaDayy/Arya-Bot-Discord.git
-cd Zibot
+cd Arya-Bot-Discord
 ```
 2. Cài đặt thư viện cần thiết:
 
