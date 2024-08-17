@@ -46,6 +46,7 @@ const client = new Client({
   ],
 });
 console.log('Server started at http://localhost:' + port);
+
 const player = new Player(client, {
   ytdlOptions: {
     quality: 'highestaudio',
@@ -172,7 +173,7 @@ client.on('guildMemberRemove', async (member) => {
 client.on('interactionCreate', async (interaction) => {
   try {
     
-    if (interaction.isAutocomplete() || interaction.isMessageComponent() || interaction.isModalSubmit()) {
+    if (interaction.isAutocomplete() || interaction.isMessageComponent() || interaction.isModalSubmit() || interaction.isUserContextMenuCommand){
       const command = interaction.client.functions.get(interaction.customId || interaction.commandName);
       if (!command) {
         //console.error(`Lệnh với ${interaction.customId || interaction.commandName} không được tìm thấy.`);

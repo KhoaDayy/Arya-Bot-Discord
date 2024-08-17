@@ -41,73 +41,78 @@ module.exports = {
 
     run: async ({ interaction }) => {
         try {
-            // Hoãn phản hồi
-            await interaction.deferReply();
+        // Hoãn phản hồi
+        await interaction.deferReply();
 
-            // Khởi tạo Replicate với API token từ biến môi trường
-            const replicate = new Replicate({
-                auth: process.env.REPLICATE_API_TOKEN,
-            });
+        // Khởi tạo Replicate với API token từ biến môi trường
+        const replicate = new Replicate({
+            auth: process.env.REPLICATE_API_TOKEN,
+        });
 
-            // Xác định subcommand được sử dụng
-            const subcommand = interaction.options.getSubcommand();
+        // Xác định subcommand được sử dụng
+        const subcommand = interaction.options.getSubcommand();
 
-            if (subcommand === "generate") {
-                // Lấy thông tin từ người dùng
-                const prompt = interaction.options.getString('prompt');
-                const model = interaction.options.getString('model');
+        if (subcommand === "generate") {
+            // Lấy thông tin từ người dùng
+            const prompt = interaction.options.getString('prompt');
+            const model = interaction.options.getString('model');
 
-                let input;
-                if (model === 'stability-ai/stable-diffusion-3'){
+            let input;
+            if (model === 'stability-ai/stable-diffusion-3'){
                 // Cấu hình đầu vào cho model
-                  input = {
-                     cfg: 3.5,
-                     steps: 28,
-                     prompt: prompt,
-                     aspect_ratio: "16:9",
-                     output_format: "png",
-                     output_quality: 90,
-                     negative_prompt: "",
-                     prompt_strength: 0.85
-                 };
-                } else if (model === 'cjwbw/waifu-diffusion:25d2f75ecda0c0bed34c806b7b70319a53a1bccad3ade1a7496524f013f48983') {
+                input = {
+                    cfg: 3.5,
+                    steps: 28,
+                    prompt: prompt,
+                    aspect_ratio: "16:9",
+                    output_format: "png",
+                    output_quality: 90,
+                    negative_prompt: "",
+                    prompt_strength: 0.85
+                };
+            } else if (model === 'cjwbw/waifu-diffusion:25d2f75ecda0c0bed34c806b7b70319a53a1bccad3ade1a7496524f013f48983') {
                 // Cấu hình đầu vào cho model
-                     input = {     
-                        width: 512,
-                        height: 512,
-                        prompt: prompt,
-                        num_outputs: 1,
-                        guidance_scale: 7.5,
-                        num_inference_steps: 50}
-                }
+                input = {
+                    width: 512,
+                    height: 512,
+                    prompt: prompt,
+                    num_outputs: 1,
+                    guidance_scale: 7.5,
+                    num_inference_steps: 50
+                };
+            }
 
+            // Đợi cho việc tạo ảnh hoàn tất
+            const output = await replicate.run(model, { input });
 
-                // Đợi cho việc tạo ảnh hoàn tất
-                const output = await replicate.run(model, { input });
-                 
-                // Xác nhận kiểu dữ liệu của output và trích xuất URL
-                const imageUrl = Array.isArray(output) ? output[0] : output;
+            // Xác nhận kiểu dữ liệu của output và trích xuất URL
+            const imageUrl = Array.isArray(output) ? output[0] : output;
 
-                // Tạo embed
-                const embed = new EmbedBuilder()
-                    .setColor(0x0099ff)
-                    .setTitle('Tạo ảnh thành công')
-                    .setImage(imageUrl)  // Đảm bảo imageUrl là một chuỗi URL
-                    .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
-                    .setTimestamp();
+            // Kiểm tra sự tồn tại của imageUrl
+            if (!imageUrl || typeof imageUrl !== 'string') {
+                throw new Error('Không thể tạo ảnh. Vui lòng thử lại sau.');
+            }
 
-                // Tạo nút tải xuống
-                const button = new ButtonBuilder()
-                    .setLabel('Tải xuống')
-                    .setStyle('Link') // Sửa kiểu nút thành 'Link'
-                    .setURL(imageUrl); // URL của ảnh để tải xuống
+            // Tạo embed
+            const embed = new EmbedBuilder()
+                .setColor(0x0099ff)
+                .setTitle('Tạo ảnh thành công')
+                .setImage(imageUrl)
+                .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() })
+                .setTimestamp();
 
-                // Tạo hàng hành động với nút
-                const row = new ActionRowBuilder()
-                    .addComponents(button);
+            // Tạo nút tải xuống
+            const button = new ButtonBuilder()
+                .setLabel('Tải xuống')
+                .setStyle('Link')
+                .setURL(imageUrl);
 
-                // Gửi phản hồi với embed và nút
-                await interaction.editReply({ embeds: [embed], components: [row] });
+            // Tạo hàng hành động với nút
+            const row = new ActionRowBuilder()
+                .addComponents(button);
+
+            // Gửi phản hồi với embed và nút
+            await interaction.editReply({ embeds: [embed], components: [row] });
             } else if (subcommand === "upscale") {
                 // get input
                 const attachment = interaction.options.getAttachment('image');

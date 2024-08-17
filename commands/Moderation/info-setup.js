@@ -53,30 +53,9 @@ module.exports = {
                     BotID: modalInteraction.fields.getTextInputValue('botcountID'),
                 };
 
-                const totalmembercount = interaction.guild.memberCount;
-                const totalbotcount = interaction.guild.members.cache.filter(member => member.user.bot).size;
-                const memberscount = totalmembercount - totalbotcount;
-
-                const count = {
-                    Total: totalmembercount,
-                    Member: memberscount,
-                    Bot: totalbotcount
-                };
-
-                const existing = await infoseverSchema.findOne({ guildID });
-
-                if (existing) {
-                    existing.Total = totalmembercount;
-                    existing.Member = memberscount;
-                    existing.Bot = totalbotcount;
-                    await existing.save();
-                    return await modalInteraction.reply({ content: 'Cập nhật thành công!', ephemeral: true });
-                }
-
                 await infoseverSchema.create({
                     guildID: guildID,
                     countID: countID,
-                    count: count
                 });
 
                 await modalInteraction.reply({ content: 'Thiết lập thành công!', ephemeral: true });

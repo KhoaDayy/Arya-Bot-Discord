@@ -10,11 +10,6 @@ const infoseverSchema = new Schema({
         MemberID: String,
         BotID: String
       },
-      count: {
-        Total: Number,
-        Member: Number,
-        Bot: Number
-      }
 });
 
 module.exports = model('InfoSever', infoseverSchema)

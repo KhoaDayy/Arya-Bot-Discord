@@ -34,7 +34,7 @@ module.exports = async (message) => {
                 level.xp = 0;
                 level.level += 1;
 
-                message.channel.send(`Chúc mừng ${message.member} đã đạt cấp độ ${level.level}!`);
+                //message.channel.send(`Chúc mừng ${message.member} đã đạt cấp độ ${level.level}!`);
             }
 
             await level.save().catch((e) => {

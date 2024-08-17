@@ -13,9 +13,14 @@ module.exports = async (client) => {
         const memberChannel = guild.channels.cache.get(infosever.countID.MemberID);
         const botChannel = guild.channels.cache.get(infosever.countID.BotID);
 
-        if (totalChannel) totalChannel.setName(`👥・Tổng Member: ${infosever.count.Total}`);
-        if (memberChannel) memberChannel.setName(` 👤・Members: ${infosever.count.Member}`);
-        if (botChannel) botChannel.setName(`🤖・Bot : ${infosever.count.Bot}`);
+        const totalmembercount = guild.memberCount;
+        const totalbotcount = guild.members.cache.filter(member => member.user.bot).size;
+        const memberscount = totalmembercount - totalbotcount;
+
+
+        if (totalChannel) totalChannel.setName(`👥・Tổng Member: ${totalmembercount}`);
+        if (memberChannel) memberChannel.setName(` 👤・Members: ${memberscount}`);
+        if (botChannel) botChannel.setName(`🤖・Bot : ${totalbotcount}`);
     };
 
     client.on('guildMemberAdd', member => {
