@@ -13,7 +13,7 @@ module.exports = {
         ),
 
 
-        run: async ({ interaction, client }) => {
+        execute: async (interaction, client) => {
             await interaction.deferReply();
         
             const banner = interaction.options.getAttachment('getbanner');

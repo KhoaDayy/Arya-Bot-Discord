@@ -7,6 +7,7 @@ module.exports = {
         .setDescription('Chat bot với ChatGPT-3-5-Turbo')
         .addSubcommand(subcommand =>
             subcommand
+            
                 .setName('chat')
                 .setDescription('Chat với ChatGPT')
                 .addStringOption(option =>
@@ -17,7 +18,7 @@ module.exports = {
                 )
         ),
 
-     run: async({interaction}) => {
+     execute: async({interaction}) => {
         try {
             const chatget = interaction.options.getString('message');
 

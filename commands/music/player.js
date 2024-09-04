@@ -14,7 +14,7 @@ data: new SlashCommandBuilder()
 
 
 
-run: async ({interaction}) => {
+execute: async (interaction) => {
     //const { client, guild } = interaction
     await interaction.deferReply();
     const queue = useQueue(interaction.guild.id);

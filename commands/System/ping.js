@@ -1,10 +1,13 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('Pong!'),
-    run: ({interaction, client}) => {
-        interaction.reply(`Pong! ${client.ws.ping}ms`);
+    execute: (interaction, client) => {
+        const embed = new EmbedBuilder()
+            .setTitle('Pong!')
+            .setDescription(```\nĐộ trễ của bot: ${client.ws.ping}ms\n```)
+        interaction.reply({ embeds: [embed] });
     },
 };

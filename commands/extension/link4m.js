@@ -13,7 +13,7 @@ module.exports = {
                 .setRequired(true)
         ),
     
-    run: async ({ interaction }) => {
+    execute: async ( interaction ) => {
         const url = interaction.options.getString('link');
         const API_TOKEN = '66bb284f9009ef0c30286547'; // Mã thông báo API của Link4m
         const LINK4M_URL = 'https://link4m.co/api-shorten/v2'; // URL API của Link4m

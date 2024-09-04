@@ -7,7 +7,7 @@ module.exports = {
         .setName('teris')
         .setDescription('Game Tetris nhưng nó là phiên bản Discord🐧'),
 
-    run: async ({ interaction }) => {
+        execute: async ( interaction ) => {
         // Khởi tạo biến và cấu hình
         let board = [];
         let points = 0;

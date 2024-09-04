@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('Test thông báo Welcome')
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
-    run: async ({ interaction }) => {
+    execute: async ( interaction ) => {
         try {
             const guildID = interaction.guild.id;
 

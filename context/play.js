@@ -8,8 +8,10 @@ module.exports = {
         .setName("Play / Add Music")
         .setType(3),
 
-    run: async (interaction) => {
-        const command = interaction.client.commands.get("play")
-        await command.run(interaction)
+    execute: async (interaction) => {
+        const query = interaction.targetMessage.content;
+
+        const command = interaction.client.functions.get("search");
+        await command.execute(interaction, query)
     }
 };

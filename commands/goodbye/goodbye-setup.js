@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('Thiết lập hệ thống goodbye cho server')
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
-    run: async ({ interaction }) => {
+    execute: async ( interaction ) => {
         try {
             const modal = new ModalBuilder()
                 .setCustomId(`goodbye-modal-${interaction.user.id}`)

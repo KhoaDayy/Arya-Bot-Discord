@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('Thiết lập hệ thống Welcome cho server')
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
-    run: async ({ interaction }) => {
+    execute: async ( interaction ) => {
         try {
             const modal = new ModalBuilder()
                 .setCustomId(`welcome-modal-${interaction.user.id}`)

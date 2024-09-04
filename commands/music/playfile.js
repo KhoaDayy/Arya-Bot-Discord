@@ -12,7 +12,7 @@ module.exports = {
                 .setRequired(true)
         ),
 
-    run: async ({ interaction }) => {
+    execute: async ( interaction ) => {
         const file = interaction.options.getAttachment('file');
         const voiceChannel = interaction.member.voice.channel;
 

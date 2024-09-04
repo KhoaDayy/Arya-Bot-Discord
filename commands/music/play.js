@@ -14,7 +14,7 @@ module.exports = {
                 .setDescription('Tìm kiếm theo từ khóa.')
                 .setRequired(true)
         ),
-    run: async ({interaction}) => {
+    execute: async (interaction) => {
         const query = interaction.options?.getString('query');
         const command = interaction.client.functions.get("search");
         await command.execute(interaction, query)

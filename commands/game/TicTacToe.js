@@ -13,7 +13,7 @@ module.exports = {
     ),
 
 
-    run: async({interaction}) => {
+    execute: async(interaction) => {
         const Game = new TicTacToe({
             message: interaction,
             isSlashGame: true,

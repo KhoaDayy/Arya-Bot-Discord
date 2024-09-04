@@ -39,7 +39,7 @@ module.exports = {
                 )
             ),
 
-    run: async ({ interaction }) => {
+    execute: async ( interaction ) => {
         try {
         // Hoãn phản hồi
         await interaction.deferReply();

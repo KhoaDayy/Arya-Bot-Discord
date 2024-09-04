@@ -17,7 +17,7 @@ module.exports = {
                 .setRequired(true)
         ),
 
-    run: async ({ interaction }) => {
+    execute: async (interaction) => {
         const location = interaction.options.getString('location');
         try {
             weather.find({ search: location, degreeType: 'C',Options: { lang: 'vi-vn' } }, async function(error, result) {

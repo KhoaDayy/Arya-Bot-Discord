@@ -14,7 +14,7 @@ module.exports = {
                 .setRequired(false)
         ),
 
-    run: async ({interaction}) => {
+    execute: async (interaction) => {
         await interaction.deferReply();
 
         const mentionedUserID = interaction.options.get('user')?.value;

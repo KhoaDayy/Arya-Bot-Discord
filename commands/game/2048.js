@@ -11,7 +11,7 @@ module.exports= {
     data : new SlashCommandBuilder()
     .setName('2048')
     .setDescription('Game 2048'),
-    run: async({interaction, message}) => {
+    execute: async(interaction, message) => {
         const Game = new TwoZeroFourEight({
             message: interaction,
             isSlashGame: true,

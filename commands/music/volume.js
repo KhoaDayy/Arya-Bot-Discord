@@ -15,7 +15,7 @@ module.exports = {
                 .setMinValue(0)
                 .setMaxValue(100)
         ),  
-    run: async ({interaction}) => {
+    execute: async (interaction) => {
         await interaction.deferReply({fetchReply: true})
         const  vol = interaction.options.getInteger('vol');
         queue = useQueue(interaction.guild.id);

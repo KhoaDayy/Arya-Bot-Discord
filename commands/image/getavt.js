@@ -8,10 +8,10 @@ module.exports = {
             option
                 .setName('user')
                 .setDescription('Chọn người bạn muốn lấy ảnh đại diện.')
-                .setRequired(true)
+                .setRequired(false)
         ),
 
-     run: ({interaction}) => {
+     execute: (interaction) => {
             const user = interaction.options.getUser("user") || interaction.user;
            // let avtimg = ("https://cdn.discordapp.com/avatars/" + user.id + "/" + user.avatar + ".png?size=1024");
           //  interaction.reply(avtimg);

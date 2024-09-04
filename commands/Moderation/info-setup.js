@@ -6,7 +6,7 @@ module.exports = {
         .setName('info-setup')
         .setDescription('Thiết lập Thông Tin cho server'),
 
-    run: async ({interaction}) => {
+    execute: async (interaction) => {
 
         if (!interaction.member.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
             return interaction.reply({ content: 'Bạn không đủ quyền hạn để sử dụng lệnh này.', ephemeral: true });

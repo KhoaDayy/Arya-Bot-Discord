@@ -6,7 +6,7 @@ module.exports = {
         .setName('snake')
         .setDescription('Game Snake'),
 
-    run: async({interaction}) => {
+        execute: async(interaction) => {
         const { Snake } = require('discord-gamecord');
 
     const Game = new Snake({
