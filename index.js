@@ -59,7 +59,7 @@ player.extractors.loadDefault();
 
 try {
   player.extractors.register(YoutubeiExtractor, {
-    authentication: 'access_token=ya29.a0AcM612we54P2okKnD6ur1c3-jz8ALD-nhDaJjg9b5TDRyR9E5HWv_wh0eO7srGeUJ4MOk7Ymx0I2OrRPN4TOYY9zvqigysfFambFMbTH7Paz93UyuFmj9q3-vDWUOop22jMZk8SXH-PmgCZt8yD5rrXqt4BhXsRcRjiDyzGzrEhE-LPlaCgYKARQSARASFQHGX2MisxMRubYTiMullwjohAHZmw0183; refresh_token=1//0eFzKEtERhrwDCgYIARAAGA4SNwF-L9Ir_q7UI5b5tWvAuYT8i1lx_OjYg3PzEWx8fT6GJ1_J7c4iGsECSmedrAVYFUx8wa0hbHo; scope=https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube-paid-content; token_type=Bearer; expiry_date=2024-08-10T11:14:41.079Z' 
+    authentication: '' 
   });
   
   
